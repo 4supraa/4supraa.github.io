@@ -1,1 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Discord Token Checker</title>
+    <style>
+        /* Add your CSS styling here */
+        /* You can style the message box, button, result section, etc. */
+    </style>
+</head>
+<body>
+    <div id="app">
+        <h1>Discord Token Checker</h1>
+        <textarea id="tokenInput" placeholder="Enter tokens (one per line)"></textarea>
+        <button onclick="checkTokens()">Check</button>
+        <div id="results"></div>
+        <a id="downloadLink" style="display: none;" download="Working_Tokens.txt" href="#">Download Working Tokens</a>
+    </div>
 
+    <script>
+        function checkTokens() {
+            const tokens = document.getElementById("tokenInput").value.split("\n").filter(token => token.trim() !== "");
+            const resultsDiv = document.getElementById("results");
+            const workingTokens = [];
+
+            tokens.forEach(token => {
+                // Perform token checking logic here (similar to your Python script)
+                // You can use Fetch API or XMLHttpRequest to send requests to Discord API
+
+                // For demonstration purposes, just adding tokens to the workingTokens array
+                workingTokens.push(token);
+            });
+
+            // Display results
+            resultsDiv.innerHTML = "<h2>Results</h2>";
+            workingTokens.forEach(token => {
+                resultsDiv.innerHTML += `<p>${token} - Working</p>`;
+            });
+
+            // Enable download link for working tokens
+            const downloadLink = document.getElementById("downloadLink");
+            downloadLink.setAttribute("href", "data:text/plain;charset=utf-8," + encodeURIComponent(workingTokens.join("\n")));
+            downloadLink.style.display = "block";
+        }
+    </script>
+</body>
+</html>
